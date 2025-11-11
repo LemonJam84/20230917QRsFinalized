@@ -3,9 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Security Warning</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #550000, #000000);
+      color: #ffdddd;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay {
+      width: 100%;
+      max-width: 900px;
+      border: 3px solid #ff0000;
+      box-shadow: 0 0 40px #ff0000;
+      background: #1a0000;
+      padding: 24px 28px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .icon {
+      font-size: 42px;
+      animation: pulse 1s infinite alternate;
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ff4444;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: blink 0.9s steps(2, start) infinite;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: #ffaaaa;
+      margin-bottom: 16px;
+    }
+
+    .simulation-note {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 12px;
+      color: #88ff88;
+      border: 1px solid #22aa22;
+    }
+
+    .details {
+      margin: 12px 0 20px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .details strong {
+      color: #ff7777;
+    }
+
+    .scan-bar {
+      width: 100%;
+      height: 10px;
+      background: #330000;
+      border: 1px solid #ff3333;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .scan-progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff0000, #ffff00);
+      animation: progress 6s linear forwards;
+    }
+
+    .scan-log {
+      height: 140px;
+      background: #050000;
+      border: 1px solid #aa0000;
+      padding: 8px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 12px;
+      overflow: hidden;
+      color: #ffbbbb;
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 11px;
+      opacity: 0.8;
+      color: #ffcccc;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    @keyframes progress {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <h1>10 of Clubs</h1>
+  <div class="overlay">
+    <div class="header">
+      <div class="icon">⚠️</div>
+      <div>
+        <div class="title">Critical Security Alert</div>
+        <div class="sub">Suspicious activity detected on this device.</div>
+      </div>
+    </div>
+
+    <div class="details">
+      <p><strong>Threat level:</strong> High</p>
+      <p><strong>Status:</strong> Scanning active processes, browser sessions, and recent downloads…</p>
+      <div class="simulation-note">
+        NOTE: This is a <strong>simulated</strong> virus warning page for demo/testing only.
+        No real threat is present.
+      </div>
+    </div>
+
+    <div class="scan-bar">
+      <div class="scan-progress"></div>
+    </div>
+
+    <div class="scan-log" id="scanLog"></div>
+
+    <div class="footer">
+      Security Center &copy; 2025 – Simulation interface
+    </div>
+  </div>
+
+  <script>
+    const lines = [
+      "[SCAN] Initializing threat detection engine…",
+      "[SCAN] Checking active browser sessions…",
+      "[SCAN] Analyzing recent downloads…",
+      "[SCAN] Verifying system integrity…",
+      "[WARN] Suspicious behavior pattern detected.",
+      "[INFO] No real virus present – this page is a simulation for demonstration only.",
+      "[DONE] Scan complete."
+    ];
+
+    const logEl = document.getElementById("scanLog");
+    let index = 0;
+
+    function addLine() {
+      if (index >= lines.length) return;
+      logEl.textContent += lines[index] + "\n";
+      logEl.scrollTop = logEl.scrollHeight;
+      index++;
+      setTimeout(addLine, 700);
+    }
+
+    addLine();
+  </script>
 </body>
 </html>
